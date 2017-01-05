@@ -1,5 +1,7 @@
 package io.mycat.bigmem.sqlcache;
 
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +40,7 @@ public class PageLRUCache {
     private final Set<Long> toDisk = new HashSet<Long>();
 
     public PageLRUCache() {
-        map = new HashMap<Long,MyCatBufferPage>();
+        map = Maps.newHashMap();
     }
 
     /**
@@ -114,7 +116,7 @@ public class PageLRUCache {
         }
 
         if (toDisk.size() > 0) {
-            values = new HashSet<MyCatBufferPage>();
+            values = Sets.newHashSet();
             for(Long key : toDisk) {
                 MyCatBufferPage v = map.remove(key);
                 values.add(v);

@@ -35,6 +35,8 @@ public class AddressIndex extends RhsPadding {
     }
 
     public AddressIndex(long initialValue) {
+        //实现非堵塞的写入，这些写入不会被Java的JIT重新排序指令(instruction reordering)，
+        // 这样它使用快速的存储-存储(store-store) barrier, 而不是较慢的存储-加载(store-load) barrier,
         UNSAFE.putOrderedLong(this, VALUE_OFFSET, initialValue);
     }
 

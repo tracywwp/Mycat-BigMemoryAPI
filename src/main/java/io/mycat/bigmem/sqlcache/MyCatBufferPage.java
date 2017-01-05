@@ -134,6 +134,9 @@ public abstract class MyCatBufferPage implements IBufferPage {
 
         @Override
         protected synchronized ByteBuffer initialValue() {
+            //创建一个与原始缓冲区共享内容的新缓冲区
+            //新缓冲区的position，limit，mark和capacity都初始化为原始缓冲区的索引值，
+            // 然而，它们的这些值是相互独立的
             ByteBuffer bbuffer = byteBuffer.duplicate();
             return bbuffer;
         }
